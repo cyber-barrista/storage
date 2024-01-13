@@ -1,8 +1,8 @@
 .vscode/
-lib/
+#lib/
 hooks/
 jest/
-types/
+#types/
 node_modules/
 playground/
 TODO
