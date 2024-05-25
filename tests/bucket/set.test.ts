@@ -2,7 +2,6 @@ import { getBucket } from '../../src/bucket'
 import {
   a,
   b,
-  bucketName,
   clear,
   get,
   keysName,
@@ -14,12 +13,13 @@ import {
   y,
   z,
   Bucket,
+  bucketConfig,
 } from './setup'
 
 beforeEach(jest.clearAllMocks)
 
 test('set with object', async () => {
-  const bucket = getBucket<Bucket>(bucketName)
+  const bucket = getBucket<Bucket>(bucketConfig)
 
   const raw = { ...values, [z]: '789' }
 
@@ -45,7 +45,7 @@ test('set with object', async () => {
 })
 
 test('set with function', async () => {
-  const bucket = getBucket<Bucket>(bucketName)
+  const bucket = getBucket<Bucket>(bucketConfig)
 
   const setFn = ({ x }: Bucket) => ({ x: x + '4' })
   const spy = jest.fn(setFn)
@@ -79,7 +79,7 @@ test('set with function', async () => {
 })
 
 test('repeated object set operations', async () => {
-  const bucket = getBucket<Bucket>(bucketName)
+  const bucket = getBucket<Bucket>(bucketConfig)
 
   const raw = {
     [x]: values[x],
@@ -114,7 +114,7 @@ test('repeated object set operations', async () => {
 })
 
 test('repeated function set operations', async () => {
-  const bucket = getBucket<Bucket>(bucketName)
+  const bucket = getBucket<Bucket>(bucketConfig)
 
   const raw = { [x]: '789', [y]: '456', [a]: '7890', [b]: '456' }
 
@@ -145,7 +145,7 @@ test('repeated function set operations', async () => {
 })
 
 test('mixed set operations', async () => {
-  const bucket = getBucket<Bucket>(bucketName)
+  const bucket = getBucket<Bucket>(bucketConfig)
 
   const raw = { [x]: '123', [y]: '456', [z]: '7890', [a]: '000' }
 

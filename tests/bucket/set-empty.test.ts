@@ -3,7 +3,7 @@ import { getBucket } from '../../src/bucket'
 import {
   anyFn,
   Bucket,
-  bucketName,
+  bucketConfig,
   clear,
   get,
   keysName,
@@ -26,7 +26,7 @@ cases<{
 }>(
   'each setter type',
   async ({ setter, setterFn, rawSetter }) => {
-    const bucket = getBucket<Bucket>(bucketName)
+    const bucket = getBucket<Bucket>(bucketConfig)
     const result = await bucket.set(setterFn || setter)
 
     expect(remove).not.toBeCalled()

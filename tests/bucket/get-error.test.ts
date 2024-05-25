@@ -1,13 +1,13 @@
 import cases from 'jest-in-case'
 import { getBucket } from '../../src/bucket'
-import { Bucket, bucketName } from './setup'
+import { Bucket, bucketConfig } from './setup'
 
 beforeEach(jest.clearAllMocks)
 
 cases<{ getter: any }>(
   'throws with wrong getter types',
   ({ getter }) => {
-    const bucket = getBucket<Bucket>(bucketName)
+    const bucket = getBucket<Bucket>(bucketConfig)
 
     const shouldThrow = () => bucket.get(getter)
 

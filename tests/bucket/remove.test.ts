@@ -3,7 +3,6 @@ import { getBucket } from '../../src/bucket'
 import {
   anyFn,
   Bucket,
-  bucketName,
   clear,
   get,
   keysName,
@@ -12,6 +11,7 @@ import {
   x,
   z,
   y,
+  bucketConfig,
 } from './setup'
 
 beforeEach(jest.clearAllMocks)
@@ -23,7 +23,7 @@ cases<{
 }>(
   'each remover type',
   async ({ remover, rawRemover, newKeys }) => {
-    const bucket = getBucket<Bucket>(bucketName)
+    const bucket = getBucket<Bucket>(bucketConfig)
 
     await bucket.remove(remover)
 
@@ -60,7 +60,7 @@ cases<{
 cases<{ remover: any; type: any }>(
   'each invalid remover type',
   async ({ remover, type }) => {
-    const bucket = getBucket<Bucket>(bucketName)
+    const bucket = getBucket<Bucket>(bucketConfig)
 
     expect(() => bucket.remove(remover)).toThrow(
       new TypeError(`Unexpected argument type: ${type}`),

@@ -7,8 +7,8 @@ import {
   set,
   x,
   y,
-  bucketName,
   Bucket,
+  bucketConfig,
 } from './setup'
 
 beforeEach(() => {
@@ -16,7 +16,7 @@ beforeEach(() => {
 })
 
 test('clear', async () => {
-  const bucket = getBucket<Bucket>(bucketName)
+  const bucket = getBucket<Bucket>(bucketConfig)
 
   await bucket.clear()
 
