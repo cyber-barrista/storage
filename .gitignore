@@ -1,10 +1,12 @@
 .vscode/
-#lib/
+lib/
 hooks/
 jest/
-#types/
+types/
 node_modules/
 playground/
+.idea/
+.vscode/
 TODO
 package-lock.json
 bucket

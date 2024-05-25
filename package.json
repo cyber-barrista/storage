@@ -1,10 +1,13 @@
 {
-  "name": "@extend-chrome/storage",
-  "version": "1.5.0",
+  "name": "@cyber.barrista/chrome-storage",
+  "version": "0.0.1",
   "description": "This is a wrapper for the Chrome Extension Storage API that adds promises and functional set transactions similar to the React `this.setState` API. Functional set transactions make it easy to use the Chrome Storage API to share and manage state between different contexts in a Chrome Extension.",
-  "repository": "extend-chrome/storage",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyber-barrista/storage.git"
+  },
   "license": "MIT",
-  "author": "<jacksteamdev@gmail.com>",
+  "author": " <cyber.barrista@gmail.com>",
   "main": "lib/index-cjs.js",
   "module": "lib/index-esm.js",
   "types": "types/index.d.ts",
@@ -64,5 +67,13 @@
     "ts-jest": "^26.5.6",
     "tslib": "^2.2.0",
     "typescript": "^4.2.4"
+  },
+  "bugs": {
+    "url": "https://github.com/cyber-barrista/storage/issues"
+  },
+  "homepage": "https://github.com/cyber-barrista/storage#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
   }
 }
