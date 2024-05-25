@@ -1,6 +1,7 @@
 import {
   AreaName,
   Bucket,
+  BucketConfig,
   Changes,
   CoreGetter,
   Getter,
@@ -40,12 +41,9 @@ export const getStorageArea = (
  * @param {string} [areaName = 'local'] The name of the storage area to use.
  * @returns {Bucket} Returns a bucket.
  */
-export function getBucket<T extends Record<string, any>>(
-  bucketName: string,
-  areaName?: AreaName,
-): Bucket<T> {
+export function getBucket<T extends Record<string, any>>(config: BucketConfig<T>): Bucket<T> {
+  const { bucketName, areaName, defaultValue } = config
   /* ------------- GET STORAGE AREA ------------- */
-  if (!areaName) areaName = 'local' as const
   const _areaName: AreaName = areaName
   const storage = getStorageArea(_areaName)
 
@@ -133,18 +131,32 @@ export function getBucket<T extends Record<string, any>>(
     }
   }
 
+  async function coreGetWithDefault(): Promise<T>
+  async function coreGetWithDefault(x: CoreGetter<T>): Promise<Partial<T>>
+  async function coreGetWithDefault(x?: CoreGetter<T>) {
+    if (x === undefined) {
+      return coreGet().then(retrieved => ({...defaultValue, ...retrieved}))
+    } else {
+      return coreGet(x).then(retrieved => {
+        const e = Object.keys(x).reduce((acc, key) => ({...acc, [key]: retrieved[key] ? retrieved[key] : defaultValue[key]}), {})
+        return e//{...defaultValue, ...retrieved}
+    })
+    }
+  }
+
+
   function get(): Promise<T>
   function get(getter: null): Promise<T>
   function get(getter: Getter<Partial<T>>): Promise<Partial<T>>
   function get(getter?: Getter<Partial<T>> | null) {
     if (getter === null || getter === undefined) {
-      return coreGet() as Promise<T>
+      return coreGetWithDefault() as Promise<T>
     }
 
     if (typeof getter === 'string' || typeof getter === 'object')
-      return coreGet(getter) as Promise<Partial<T>>
+      return coreGetWithDefault(getter) as Promise<Partial<T>>
     if (typeof getter === 'function')
-      return coreGet().then(getter)
+      return coreGetWithDefault().then(getter)
 
     throw new TypeError(
       `Unexpected argument type: ${typeof getter}`,

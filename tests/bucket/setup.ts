@@ -1,3 +1,5 @@
+import { BucketConfig } from "../../types"
+
 export const bucketName = 'bucket1'
 export const prefix = `extend-chrome/storage__${bucketName}`
 export const keysName = `${prefix}_keys`
@@ -28,6 +30,18 @@ export interface Bucket {
   z: string
   a: string
   b: string
+}
+
+export const bucketConfig: BucketConfig<Bucket> = {
+  bucketName,
+  areaName: "local",
+  defaultValue: {
+    x: "",
+    y: "",
+    z: "",
+    a: "",
+    b: "",
+  }
 }
 
 export const x = pfx('x')

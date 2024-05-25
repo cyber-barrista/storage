@@ -3,7 +3,7 @@ import { getBucket } from '../../src/bucket'
 import {
   anyFn,
   Bucket,
-  bucketName,
+  bucketConfig,
   clear,
   get,
   keysName,
@@ -30,7 +30,7 @@ cases<{
       }
     })
 
-    const bucket = getBucket<Bucket>(bucketName)
+    const bucket = getBucket<Bucket>(bucketConfig)
     const result = await bucket.get(getter)
 
     expect(result).toEqual(expected)

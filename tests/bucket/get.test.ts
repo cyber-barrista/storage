@@ -3,7 +3,7 @@ import { getBucket } from '../../src/bucket'
 import {
   anyFn,
   Bucket,
-  bucketName,
+  bucketConfig,
   clear,
   get,
   keys,
@@ -27,7 +27,7 @@ cases<{
 }>(
   'each getter type',
   async ({ getter, rawGetter, got, calls, expected }) => {
-    const bucket = getBucket<Bucket>(bucketName)
+    const bucket = getBucket<Bucket>(bucketConfig)
 
     get.mockImplementation((getter, cb) => {
       if (getter === keysName) {

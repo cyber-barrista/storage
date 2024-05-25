@@ -2,6 +2,12 @@ import { Observable } from 'rxjs'
 
 export type AreaName = 'local' | 'sync' | 'managed'
 
+export type BucketConfig<T> = {
+  bucketName: string;
+  areaName: AreaName;
+  defaultValue: T;
+};
+
 export type CoreGetter<T> =
   | Extract<keyof T, string>
   | Extract<keyof T, string>[]

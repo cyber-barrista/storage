@@ -184,17 +184,6 @@ Multiple synchronous calls to set are composed into one call to
 the native Chrome API
 [`StorageArea.set`](https://developer.chrome.com/extensions/storage#method-StorageArea-set).
 
-Default storage areas are included, so you can just import
-`storage` if you're don't care about types and only need one
-storage area.
-
-```javascript
-import { storage } from '@extend-chrome/storage'
-
-storage.local.set({ a: 'abc' })
-storage.sync.set({ b: 123 })
-```
-
 Create a bucket or two using [`getBucket`](#api-getBucket):
 
 ```javascript
